@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-
+from datetime import date as Date
 
 class Circuit(BaseModel):
     circuitId: int
@@ -55,4 +55,41 @@ class Driver(BaseModel):
             nationality=data["nationality"],
             # podiums=podiums,
             # championships=championships
+        )
+    
+
+class Results(BaseModel):
+    raceId: int
+    driverId: str
+    constructorId: str
+    points: float
+    laps: int
+    time: str
+    fastestLapTime: str
+    driverRef: str
+    nationality: str
+    circuitId: int
+    circuitname: str
+    date: Date
+
+
+
+    @classmethod
+    def from_data(cls, data):
+        """Class method to create a driver instance from raw data"""
+        # championships = cls.get_championships(data)
+        # podiums = cls.get_podiums(data)
+        return cls(
+            raceID=data["raceId"],
+            driverId=data["driverId"],
+            constructorId=data["constructorId"],
+            points=data["points"],
+            laps=data["laps"],
+            time=data["time"],
+            fastestLapTime=data["fastestLapTime"],
+            driverRef=data["driverRef"],
+            nationality=data["nationality"],
+            circuitId=data["circuitId"],
+            circuitname=data["circuitname"],
+            date=data["date"]
         )
