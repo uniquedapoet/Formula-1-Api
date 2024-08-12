@@ -9,11 +9,13 @@ try:
 except ImportError:
     from app.models.db_models import Base, Circuit, Driver
 try:
-    from app.models.pydantic_model import Circuit as PydanticCircuit, Driver as PydanticDriver  # Import your Pydantic models
-except ImportError: 
-    from pydantic_model import Circuit as PydanticCircuit, Driver as PydanticDriver  # Import your Pydantic models
+    from app.models.pydantic_model import Circuit as PydanticCircuit
+    from app.models.pydantic_model import Driver as PydanticDriver
+except ImportError:
+    from pydantic_model import Circuit as PydanticCircuit
+    from pydantic_model import Driver as PydanticDriver
 try:
-    from app.database import engine, SessionLocal  # Import the engine and SessionLocal
+    from app.database import engine, SessionLocal
 except ImportError:
     from app.database import engine, SessionLocal
 
@@ -24,6 +26,7 @@ logger = logging.getLogger(__name__)
 # Create all tables in the database
 Base.metadata.create_all(bind=engine)
 
+
 def load_circuits_data():
     global circuits_data
     base_path = os.path.dirname(os.path.abspath(__file__))
@@ -31,11 +34,11 @@ def load_circuits_data():
     with open(file_path) as f:
         reader = csv.DictReader(f)
         circuits_data = list(reader)
-    
+
     session = SessionLocal()
     try:
         for row in circuits_data:
-            pydantic_circuit = PydanticCircuit(**row)  # Validate data with Pydantic
+            pydantic_circuit = PydanticCircuit(**row)
             db_circuit = Circuit(
                 circuitRef=pydantic_circuit.circuitRef,
                 name=pydantic_circuit.name,
@@ -44,7 +47,7 @@ def load_circuits_data():
                 lat=pydantic_circuit.lat,
                 lng=pydantic_circuit.lng,
                 alt=pydantic_circuit.alt,
-                fastest_lap=pydantic_circuit.fastest_lap
+                fastest_lap=pydantic_circuit.fastest_lap,
             )  # Convert to SQLAlchemy model
             session.add(db_circuit)
         session.commit()
@@ -63,7 +66,7 @@ def load_drivers_data():
     with open(file_path) as f:
         reader = csv.DictReader(f)
         drivers_data = list(reader)
-    
+
     session = SessionLocal()
     try:
         for row in drivers_data:
@@ -85,6 +88,7 @@ def load_drivers_data():
         session.rollback()
     finally:
         session.close()
+
 
 if __name__ == "__main__":
     load_circuits_data()

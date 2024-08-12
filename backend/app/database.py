@@ -2,7 +2,6 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker
 from databases import Database
 
-import os
 
 # URL-encoded password
 DATABASE_URL = "postgresql://eduardobenjamin:K%40rat305@:5432/eduardobenjamin"

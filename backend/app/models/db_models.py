@@ -3,8 +3,9 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+
 class Circuit(Base):
-    __tablename__ = 'circuits'
+    __tablename__ = "circuits"
     circuitId = Column(Integer, primary_key=True)
     circuitRef = Column(String)
     name = Column(String)
@@ -15,8 +16,9 @@ class Circuit(Base):
     alt = Column(Float)
     fastest_lap = Column(String, nullable=True)
 
+
 class Driver(Base):
-    __tablename__ = 'drivers'
+    __tablename__ = "drivers"
     driverId = Column(Integer, primary_key=True)
     driverRef = Column(String)
     number = Column(String)

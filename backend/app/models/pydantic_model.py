@@ -25,7 +25,7 @@ class Circuit(BaseModel):
             lng=data["lng"],
             alt=data["alt"],
         )
-    
+
 
 class Driver(BaseModel):
     driverId: int

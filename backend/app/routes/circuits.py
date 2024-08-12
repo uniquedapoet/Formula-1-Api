@@ -5,13 +5,13 @@ from typing import List
 
 router = APIRouter()
 
+
 @router.get("/circuits", response_model=List[Circuit])
 def get_circuits():
-    df = pd.read_csv(
-        "../backend/data/circuits.csv"
-    )
+    df = pd.read_csv("../backend/data/circuits.csv")
     circuits = [Circuit.from_data(row) for _, row in df.iterrows()]
     return circuits
+
 
 @router.get("/circuits/{circuit_id}", response_model=Circuit)
 def get_circuit(

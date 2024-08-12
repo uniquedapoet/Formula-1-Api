@@ -13,6 +13,7 @@ def get_drivers():
     drivers = [Driver.from_data(row) for _, row in df.iterrows()]
     return drivers
 
+
 @router.get("/drivers/{driver}", response_model=Driver)
 def get_driver(driver: str):
     df = pd.read_csv("../backend/data/drivers.csv")

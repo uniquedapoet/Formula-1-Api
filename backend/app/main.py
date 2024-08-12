@@ -14,7 +14,7 @@ app = FastAPI()
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Adjust this to match your frontend URL
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -23,9 +23,11 @@ app.add_middleware(
 app.include_router(circuits.router)
 app.include_router(drivers.router)
 
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Formula 1 API!"}
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -35,6 +37,7 @@ async def lifespan(app: FastAPI):
     print("Data loaded!")
     yield
     # No shutdown code needed in this case
+
 
 app.router.lifespan_context = lifespan
 
