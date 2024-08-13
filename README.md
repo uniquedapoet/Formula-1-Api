@@ -13,6 +13,7 @@ This project provides a RESTful API for accessing Formula 1 data, including info
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+- ~~strikethrough~~ means not yet available
 
 ## Installation
 
@@ -73,8 +74,8 @@ The backend is built using FastAPI and provides various endpoints to access Form
 
 - **GET /drivers**: Retrieve a list of drivers.
 - **GET /circuits**: Retrieve a list of circuits.
-- **GET /races**: Retrieve a list of races.
-- **GET /constructors**: Retrieve a list of constructors.
+- **GET /results**: Retrieve a list of races.
+- ~~**GET /constructors**: Retrieve a list of constructors.~~
 
 For detailed API documentation, visit the automatically generated docs at [`http://localhost:8000/docs`]when the backend server is running.
 
