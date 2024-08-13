@@ -2,14 +2,14 @@ from pydantic import BaseModel, Field
 from datetime import date as Date
 
 class Circuit(BaseModel):
-    circuitId: int
-    circuitRef: str
-    name: str
-    location: str
-    country: str
-    lat: float
-    lng: float
-    alt: float
+    circuitId: int = Field(default=0, description="Circuit ID")
+    circuitRef: str = Field(default="", description="Circuit reference")
+    name: str = Field(default="", description="Circuit name")
+    location: str = Field(default="", description="Circuit location")
+    country: str = Field(default="", description="Circuit country")
+    lat: float = Field(default=0.0, description="Circuit latitude")
+    lng: float = Field(default=0.0, description="Circuit longitude")
+    alt: float = Field(default=0.0, description="Circuit altitude")
     fastest_lap: str = Field(default=None, description="Fastest lap time")
 
     @classmethod
@@ -25,19 +25,20 @@ class Circuit(BaseModel):
             lng=data["lng"],
             alt=data["alt"],
         )
+    
+    class Config:
+        orm_mode = True
 
 
 class Driver(BaseModel):
-    driverId: int
-    driverRef: str
-    number: str
-    code: str
-    forename: str
-    surname: str
-    dob: str
-    nationality: str
-    podiums: int = Field(default=0, description="Number of podiums")
-    championships: int = Field(default=0, description="Number of championships won")
+    driverId: int = Field(default=0, description="Driver ID")
+    driverRef: str = Field(default="", description="Driver reference")
+    number: str = Field(default="", description="Driver number")
+    code: str = Field(default="", description="Driver code")
+    forename: str = Field(default="", description="Driver forename")
+    surname: str = Field(default="", description="Driver surname")
+    dob: str = Field(default="", description="Driver date of birth")
+    nationality: str = Field(default="", description="Driver nationality")
 
     @classmethod
     def from_data(cls, data):
@@ -57,20 +58,23 @@ class Driver(BaseModel):
             # championships=championships
         )
     
+    class Config:
+        orm_mode = True
+    
 
 class Results(BaseModel):
-    raceId: int
-    driverId: str
-    constructorId: str
-    points: float
-    laps: int
-    time: str
-    fastestLapTime: str
-    driverRef: str
-    nationality: str
-    circuitId: int
-    circuitname: str
-    date: Date
+    raceId: int = Field(default=0, description="Race ID")
+    driverId: str = Field(default="", description="Driver ID")
+    constructorId: str = Field(default="", description="Constructor ID")
+    points: float = Field(default=0.0, description="Points")
+    laps: int = Field(default=0, description="Laps")
+    time: str = Field(default="", description="Time")
+    fastestLapTime: str = Field(default="", description="Fastest lap time")
+    driverRef: str = Field(default="", description="Driver reference")
+    nationality: str = Field(default="", description="Driver nationality")
+    circuitId: int = Field(default=0, description="Circuit ID")
+    circuitname: str = Field(default="", description="Circuit name")
+    date: Date = Field(default=Date.today(), description="Date of the Race")
 
 
 
@@ -93,3 +97,6 @@ class Results(BaseModel):
             circuitname=data["circuitname"],
             date=data["date"]
         )
+    
+    class Config:
+        orm_mode = True

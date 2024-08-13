@@ -3,24 +3,24 @@ import csv
 import logging
 
 
-# try:
-#     from db_models import Base, Circuit, Driver  # Import your models
-# except ImportError:
-#     from app.models.db_models import Base, Circuit, Driver
-# try:
-#     from app.models.pydantic_model import Circuit
-#     from app.models.pydantic_model import Driver 
-#     from app.models.pydantic_model import Results 
-# except ImportError:
-#     from pydantic_model import Circuit, Driver, Result
-# try:
-#     from app.database import engine, SessionLocal
-# except ImportError:
-#     from app.database import engine, SessionLocal
+try:
+    from db_models import Base, Circuit, Driver  # Import your models
+except ImportError:
+    from app.models.db_models import Base, Circuit, Driver, Results
+try:
+    from app.models.pydantic_model import Circuit as pydanticCircuit
+    from app.models.pydantic_model import Driver as pydanticDriver
+    from app.models.pydantic_model import Results as pydanticResult
+except ImportError:
+    from pydantic_model import Circuit, Driver, Results
+try:
+    from app.database import engine, SessionLocal
+except ImportError:
+    from app.database import engine, SessionLocal
 
-from models.pydantic_model import Circuit as pydanticCircuit, Driver as pydanticDriver, Results as pydanticResult
-from database import engine, SessionLocal
-from models.db_models import Base, Circuit, Driver, Results
+# from models.pydantic_model import Circuit as pydanticCircuit, Driver as pydanticDriver, Results as pydanticResult
+# from database import engine, SessionLocal
+# from models.db_models import Base, Circuit, Driver, Results
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -128,7 +128,7 @@ def load_results_data():
         session.close()
 
 
-if __name__ == "__main__":
-    load_circuits_data()
-    load_drivers_data()
-    load_results_data()
+# if __name__ == "__main__":
+#     load_circuits_data()
+#     load_drivers_data()
+#     load_results_data()
