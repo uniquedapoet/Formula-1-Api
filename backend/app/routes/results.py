@@ -24,8 +24,8 @@ def get_results(db: Session = Depends(get_db)):
 
 
 @router.get("/results/{date}", response_model=PydanticResults)
-def get_result(date: int, db: Session = Depends(get_db)):
-    results = db.query(DBResult).filter(DBResult.id == date).all()
+def get_result(date: str, db: Session = Depends(get_db)):
+    results = db.query(DBResult).filter(DBResult.date == date).all()
     if not results:
         raise HTTPException(status_code=404, detail="Result not found")
     return [PydanticResults.from_orm(result) for result in results]
