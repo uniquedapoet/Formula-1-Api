@@ -2,22 +2,25 @@ import os
 import csv
 import logging
 
-print("Current working directory:", os.getcwd())
 
 try:
     from db_models import Base, Circuit, Driver  # Import your models
 except ImportError:
-    from app.models.db_models import Base, Circuit, Driver
+    from app.models.db_models import Base, Circuit, Driver, Results
 try:
-    from app.models.pydantic_model import Circuit as PydanticCircuit
-    from app.models.pydantic_model import Driver as PydanticDriver
+    from app.models.pydantic_model import Circuit as pydanticCircuit
+    from app.models.pydantic_model import Driver as pydanticDriver
+    from app.models.pydantic_model import Results as pydanticResult
 except ImportError:
-    from pydantic_model import Circuit as PydanticCircuit
-    from pydantic_model import Driver as PydanticDriver
+    from pydantic_model import Circuit, Driver, Results
 try:
     from app.database import engine, SessionLocal
 except ImportError:
     from app.database import engine, SessionLocal
+
+# from models.pydantic_model import Circuit as pydanticCircuit, Driver as pydanticDriver, Results as pydanticResult
+# from database import engine, SessionLocal
+# from models.db_models import Base, Circuit, Driver, Results
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -38,7 +41,7 @@ def load_circuits_data():
     session = SessionLocal()
     try:
         for row in circuits_data:
-            pydantic_circuit = PydanticCircuit(**row)
+            pydantic_circuit = pydanticCircuit(**row)
             db_circuit = Circuit(
                 circuitRef=pydantic_circuit.circuitRef,
                 name=pydantic_circuit.name,
@@ -70,7 +73,7 @@ def load_drivers_data():
     session = SessionLocal()
     try:
         for row in drivers_data:
-            pydantic_driver = PydanticDriver(**row)  # Validate data with Pydantic
+            pydantic_driver = pydanticDriver(**row)  # Validate data with Pydantic
             db_driver = Driver(
                 driverRef=pydantic_driver.driverRef,
                 number=pydantic_driver.number,
@@ -90,6 +93,42 @@ def load_drivers_data():
         session.close()
 
 
-if __name__ == "__main__":
-    load_circuits_data()
-    load_drivers_data()
+def load_results_data():
+    global results_data
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_path, "../data/race_results.csv")
+    with open(file_path) as f:
+        reader = csv.DictReader(f)
+        results_data = list(reader)
+    session = SessionLocal()
+    try:
+        for row in results_data:
+            pydantic_result = pydanticResult(**row)
+            db_result = Results(
+                raceId=pydantic_result.raceId,
+                driverId=pydantic_result.driverId,
+                constructorId=pydantic_result.constructorId,
+                points=pydantic_result.points,
+                laps=pydantic_result.laps,
+                time=pydantic_result.time,
+                fastestLapTime=pydantic_result.fastestLapTime,
+                driverRef=pydantic_result.driverRef,
+                nationality=pydantic_result.nationality,
+                circuitId=pydantic_result.circuitId,
+                circuitname=pydantic_result.circuitname,
+                date=pydantic_result.date
+            )
+            session.merge(db_result)
+        session.commit()
+        logger.info("Results data loaded successfully.")
+    except Exception as e:
+        logger.error(f"Error loading results data: {e}")
+        session.rollback()
+    finally:
+        session.close()
+
+
+# if __name__ == "__main__":
+#     load_circuits_data()
+#     load_drivers_data()
+#     load_results_data()

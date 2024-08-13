@@ -6,6 +6,10 @@ import '../load_data.css'; // Import the CSS file
 export const DataLoader = () => {
   const [drivers, setDrivers] = useState(null);
   const [circuits, setCircuits] = useState(null);
+  const [selectedDriver, setSelectedDriver] = useState(null);
+  const [selectedCircuit, setSelectedCircuit] = useState(null);
+  const [driverInputValue, setDriverInputValue] = useState('');
+  const [circuitInputValue, setCircuitInputValue] = useState('');
 
   const driverInputRef = createRef();
   const circuitInputRef = createRef();
@@ -36,15 +40,13 @@ export const DataLoader = () => {
   }, []);
 
   const clearDriver = () => {
-    if (driverInputRef.current) {
-      driverInputRef.current.value = '';
-    }
+    setDriverInputValue('');
+    setSelectedDriver(null);
   };
 
   const clearCircuit = () => {
-    if (circuitInputRef.current) {
-      circuitInputRef.current.value = '';
-    }
+    setCircuitInputValue('');
+    setSelectedCircuit(null);
   };
 
   const driverOptions = drivers ? drivers.map(driver => ({
@@ -65,7 +67,10 @@ export const DataLoader = () => {
         <div>
           <h2>Select a Driver:</h2>
           <Downshift
+            inputValue={driverInputValue}
+            onChange={selection => setSelectedDriver(selection.data)}
             itemToString={item => (item ? item.label : '')}
+            onInputValueChange={setDriverInputValue}
           >
             {({
               getInputProps,
@@ -91,13 +96,13 @@ export const DataLoader = () => {
                         .slice(0, 10)
                         .map((item, index) => (
                           <li
+                            key={item.value}
                             {...getItemProps({
-                              key: item.value,
                               index,
                               item,
                               style: {
                                 backgroundColor:
-                                  highlightedIndex === index ? 'lightgray' : 'white',
+                                  highlightedIndex === index ? 'lightgray' : 'gray',
                                 fontWeight: selectedItem === item ? 'bold' : 'normal',
                               },
                             })}
@@ -110,13 +115,23 @@ export const DataLoader = () => {
               </div>
             )}
           </Downshift>
+          {selectedDriver && (
+            <div>
+              <h3>Selected Driver: {selectedDriver.name}</h3>
+              <p>Team: {selectedDriver.driverRef}</p>
+            </div>
+          )}
         </div>
       )}
+
       {circuits && (
         <div>
           <h2>Select a Circuit:</h2>
           <Downshift
+            inputValue={circuitInputValue}
+            onChange={selection => setSelectedCircuit(selection.data)}
             itemToString={item => (item ? item.label : '')}
+            onInputValueChange={setCircuitInputValue}
           >
             {({
               getInputProps,
@@ -142,13 +157,13 @@ export const DataLoader = () => {
                         .slice(0, 10)
                         .map((item, index) => (
                           <li
+                            key={item.value}
                             {...getItemProps({
-                              key: item.value,
                               index,
                               item,
                               style: {
                                 backgroundColor:
-                                  highlightedIndex === index ? 'lightgray' : 'white',
+                                  highlightedIndex === index ? 'lightgray' : 'gray',
                                 fontWeight: selectedItem === item ? 'bold' : 'normal',
                               },
                             })}
@@ -161,6 +176,12 @@ export const DataLoader = () => {
               </div>
             )}
           </Downshift>
+          {selectedCircuit && (
+            <div>
+              <h3>Selected Circuit: {selectedCircuit.name}</h3>
+              <p>Location: {selectedCircuit.location}</p>
+            </div>
+          )}
         </div>
       )}
     </div>

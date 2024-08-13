@@ -13,7 +13,7 @@
   }
 }
 
-.App-header {
+.App {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -27,6 +27,16 @@
 .App-link {
   color: #61dafb;
 }
+
+#search-container {
+  display: flex;
+  justify-content: flex-start; /* Aligns the container to the left */
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: 10%;
+  background-color: #282c34;
+}
+
 
 @keyframes App-logo-spin {
   from {

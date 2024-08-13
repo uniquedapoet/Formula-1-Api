@@ -2,8 +2,11 @@ import sys
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import circuits, drivers
-from app.data_loader import load_circuits_data, load_drivers_data
+from app.routes import circuits, drivers, results
+# from routes import circuits, drivers
+
+from app.data_loader import load_circuits_data, load_drivers_data, load_results_data
+# from data_loader import load_circuits_data, load_drivers_data
 from contextlib import asynccontextmanager
 import uvicorn
 
@@ -22,6 +25,7 @@ app.add_middleware(
 
 app.include_router(circuits.router)
 app.include_router(drivers.router)
+app.include_router(results.router)
 
 
 @app.get("/")
@@ -34,6 +38,7 @@ async def lifespan(app: FastAPI):
     # Startup code
     load_circuits_data()
     load_drivers_data()
+    load_results_data()
     print("Data loaded!")
     yield
     # No shutdown code needed in this case
@@ -42,4 +47,4 @@ async def lifespan(app: FastAPI):
 app.router.lifespan_context = lifespan
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=5000)

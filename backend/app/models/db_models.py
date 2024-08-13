@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, Date
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -29,3 +29,20 @@ class Driver(Base):
     nationality = Column(String)
     podiums = Column(Integer)
     championships = Column(Integer)
+
+
+class Results(Base):
+    __tablename__ = "results"
+    index = Column(Integer, primary_key=True)
+    raceId = Column(Integer)
+    driverId = Column(Integer)   
+    constructorId = Column(Integer)
+    points = Column(Float) 
+    laps = Column(Integer) 
+    time = Column(String)  
+    fastestLapTime = Column(String)
+    driverRef = Column(String)  
+    nationality = Column(String)  
+    circuitId = Column(Integer)  
+    circuitname = Column(String) 
+    date = Column(Date)
