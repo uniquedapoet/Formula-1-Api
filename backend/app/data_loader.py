@@ -103,6 +103,12 @@ def load_results_data():
     session = SessionLocal()
     try:
         for row in results_data:
+            logger.debug(f"Processing row: {row}")
+
+            # Check if 'year' is in the row
+            if 'year' not in row:
+                logger.warning(f"Missing 'year' in row: {row}")
+                continue
             pydantic_result = pydanticResult(**row)
             db_result = Results(
                 raceId=pydantic_result.raceId,
@@ -116,7 +122,8 @@ def load_results_data():
                 nationality=pydantic_result.nationality,
                 circuitId=pydantic_result.circuitId,
                 circuitname=pydantic_result.circuitname,
-                date=pydantic_result.date
+                date=pydantic_result.date,
+                year=pydantic_result.year
             )
             session.merge(db_result)
         session.commit()
@@ -128,7 +135,7 @@ def load_results_data():
         session.close()
 
 
-# if __name__ == "__main__":
-#     load_circuits_data()
-#     load_drivers_data()
-#     load_results_data()
+if __name__ == "__main__":
+    # load_circuits_data()
+    # load_drivers_data()
+    load_results_data()
