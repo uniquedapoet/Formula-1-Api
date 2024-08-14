@@ -17,7 +17,7 @@ def get_db():
 
 @router.get("/results", response_model=List[PydanticResults])
 def get_results(db: Session = Depends(get_db)):
-    results = db.query(DBResult).limit(500).all()  
+    results = db.query(DBResult).limit(27000).all()  
     if not results:
         raise HTTPException(status_code=404, detail="No results found")
     return [PydanticResults.from_orm(result) for result in results]

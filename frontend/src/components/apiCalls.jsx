@@ -21,3 +21,13 @@ export const getCircuitData = async () => {
         throw error;
     }
 };
+
+export const getResultsData = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/results`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching result data:', error);
+        throw error;
+    }
+};
