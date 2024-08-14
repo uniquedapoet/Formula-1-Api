@@ -46,3 +46,4 @@ class Results(Base):
     circuitId = Column(Integer)  
     circuitname = Column(String) 
     date = Column(Date)
+    year = Column(Integer)

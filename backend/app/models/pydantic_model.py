@@ -1,5 +1,7 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 from datetime import date as Date
+from typing import Optional
+
 
 class Circuit(BaseModel):
     circuitId: int = Field(default=0, description="Circuit ID")
@@ -75,28 +77,33 @@ class Results(BaseModel):
     circuitId: int = Field(default=0, description="Circuit ID")
     circuitname: str = Field(default="", description="Circuit name")
     date: Date = Field(default=Date.today(), description="Date of the Race")
+    year: Optional[int] = Field(default=0, description="Year of the Race")
 
 
 
     @classmethod
     def from_data(cls, data):
         """Class method to create a driver instance from raw data"""
-        # championships = cls.get_championships(data)
-        # podiums = cls.get_podiums(data)
-        return cls(
-            raceID=data["raceId"],
-            driverId=data["driverId"],
-            constructorId=data["constructorId"],
-            points=data["points"],
-            laps=data["laps"],
-            time=data["time"],
-            fastestLapTime=data["fastestLapTime"],
-            driverRef=data["driverRef"],
-            nationality=data["nationality"],
-            circuitId=data["circuitId"],
-            circuitname=data["circuitname"],
-            date=data["date"]
-        )
+        try:
+            return cls(
+                raceID=data["raceId"],
+                driverId=data["driverId"],
+                constructorId=data["constructorId"],
+                points=data["points"],
+                laps=data["laps"],
+                time=data["time"],
+                fastestLapTime=data["fastestLapTime"],
+                driverRef=data["driverRef"],
+                nationality=data["nationality"],
+                circuitId=data["circuitId"],
+                circuitname=data["circuitname"],
+                date=data["date"],
+                year=data["year"]
+            )
+        except ValidationError as e:
+            print(f"Validation error: {e}")
+            print(f"Problematic data: {data}")
+            raise
     
     class Config:
         orm_mode = True
