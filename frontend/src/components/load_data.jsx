@@ -14,6 +14,8 @@ export const DataLoader = () => {
   const [circuitInputValue, setCircuitInputValue] = useState("");
   const [resultInputValue, setResultInputValue] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
+  const [races, setRaces] = useState([]);
+
 
 
   const driverInputRef = createRef();
@@ -51,6 +53,17 @@ export const DataLoader = () => {
       }
     };
 
+    const fetchRaces = async () => {
+      try {
+        const response = await fetch("/results/years/2008");
+        const data = await response.json();
+        setRaces(data);
+      } catch (error) {
+        console.error("Error fetching races:", error);
+      }
+    };
+
+    fetchRaces();
     fetchResultsData();
     fetchDriverData();
     fetchCircuitData();
@@ -103,6 +116,10 @@ export const DataLoader = () => {
       })
     : [];
 
+    const filteredResults = resultOptions.filter(
+      (item) => selectedYear === "" || item.year === parseInt(selectedYear)
+    );
+  
     
     return (
     <div>
@@ -175,12 +192,15 @@ export const DataLoader = () => {
         </div>
       )}
 
+
 <div>
       <label htmlFor="year-select">Select Year:</label>
       <select
         id="year-select"
         value={selectedYear}
-        onChange={(e) => setSelectedYear(e.target.value)}
+        onChange={(e) => setSelectedYear(e.target.value)
+        
+        }
       >
         <option value="">All Years</option>
         {resultOptions
@@ -219,43 +239,46 @@ export const DataLoader = () => {
                 </button>
             <ul {...getMenuProps()}>
               {isOpen
-                ? resultOptions
-                    .filter(
-                      (item) =>
-                        (!inputValue || item.refrence.includes(inputValue)) &&
-                        (!selectedYear || item.year === selectedYear)
-                    )
-                    .slice(0, 10)
-                    .map((item, index) => (
-                      <li
-                        key={`${item.refrence}-${index}`}
-                        {...getItemProps({
-                          index,
-                          item,
-                          style: {
-                            backgroundColor:
-                              highlightedIndex === index ? "lightgray" : "gray",
-                            fontWeight: selectedItem === item ? "bold" : "normal",
-                          },
-                        })}
-                      >
-                        {item.label}
-                      </li>
-                    ))
-                : null}
-            </ul>
-          </div>
-        )}
-      </Downshift>
+                ? filteredResults
+                .filter((item) =>
+                  item.label
+                    .toLowerCase()
+                    .includes(inputValue.toLowerCase())
+                )
+                .slice(0, 10)
+                .sort((a, b) => a.label.localeCompare(b.label)) 
+                .map((item, index) => (
+                  <li
+                    key={item.id}
+                    {...getItemProps({
+                      index,
+                      item,
+                      style: {
+                        backgroundColor:
+                          highlightedIndex === index
+                            ? "lightgray"
+                            : "gray",
+                        fontWeight:
+                          selectedItem === item ? "bold" : "normal",
+                      },
+                    })}
+                  >
+                    {item.label}
+                  </li>
+                ))
+            : null}
+        </ul>
+      </div>
+    )}
+  </Downshift>
 
-      {selectedResult && (
-        <div>
-          <h3>Selected Result: {selectedResult.year}</h3>
-          <p>Team: {selectedResult.label}</p>
-          {console.log(selectedResult)}
-        </div>
-      )}
+  {selectedResult && (
+    <div>
+      <h3>Selected Result: {selectedResult.label}</h3>
+      <p>Year: {selectedResult.year}</p>
     </div>
+  )}
+</div>
 
       {circuits && (
         <div>
