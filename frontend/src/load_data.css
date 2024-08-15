@@ -11,7 +11,9 @@
     font-size: 1.5rem;
     cursor: pointer;
     color: #999;
-  }
+    position: absolute;
+    transform: translateY(20%);
+}
 
 .clear-button:hover {
     color: #666;
