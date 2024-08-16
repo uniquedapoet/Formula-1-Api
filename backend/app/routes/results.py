@@ -18,15 +18,15 @@ def get_db():
 
 @router.get("/results", response_model=List[PydanticResults])
 def get_results(db: Session = Depends(get_db)):
-    results = db.query(DBResult).limit(27000).all()  
+    results = db.query(DBResult).limit(27000).distinct()  
     if not results:
         raise HTTPException(status_code=404, detail="No results found")
     return [PydanticResults.from_orm(result) for result in results]
 
 
-@router.get("/results/{}", response_model=PydanticResults)
+@router.get("/results/{date}", response_model=PydanticResults)
 def get_result_date(date: str, db: Session = Depends(get_db)):
-    results = db.query(DBResult).filter(DBResult.date == date).all()
+    results = db.query(DBResult).filter(DBResult.date == date).distinct()
     if not results:
         raise HTTPException(status_code=404, detail="Result not found")
     return [PydanticResults.from_orm(result) for result in results]

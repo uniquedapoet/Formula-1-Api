@@ -20,7 +20,8 @@ def get_db():
 
 import logging
 
-@router.get("/results", response_model=List[PydanticResult])
+
+@router.get("/query/results", response_model=List[PydanticResult])
 def get_results(
     circuitRef: Optional[str] = Query(None, description="Filter by circuit reference"),
     driver: Optional[str] = Query(None, description="Filter by driver"),
@@ -39,7 +40,7 @@ def get_results(
         query = query.filter(DBResult.nationality == nationality)
 
     # Log the generated SQL query
-    logging.info(str(query.statement.compile(compile_kwargs={"literal_binds": True})))
+    # logging.info(str(query.statement.compile(compile_kwargs={"literal_binds": True})))
 
     results = query.distinct()
 
@@ -50,34 +51,6 @@ def get_results(
 
     return [PydanticResult.from_orm(result) for result in results]
 
-
-@router.get("/results", response_model=List[PydanticResult])
-def get_results_with_query_parameters(
-    circuitRef: Optional[str] = Query(None, description="Filter by circuit reference"),
-    driver: Optional[str] = Query(None, description="Filter by driver"),
-    nationality: Optional[str] = Query(None, description="Filter by nationality"),
-    db: Session = Depends(get_db),
-):
-    query = db.query(DBResult)
-
-    # Apply dynamic filters based on query parameters
-    # Apply dynamic filters based on query parameters
-    if circuitRef is not None:
-        query = query.filter(DBCircuit.circuitRef == circuitRef)
-    if driver is not None:
-        query = query.filter(DBDriver.driverRef == driver)
-    if nationality is not None:
-        query = query.filter(DBDriver.nationality == nationality)
-
-    # Log the generated SQL query
-    logging.info(str(query.statement.compile(compile_kwargs={"literal_binds": True})))
-
-    results = query.all()
-
-    if not results:
-        raise HTTPException(status_code=404, detail="No results found")
-
-    return [PydanticResult.from_orm(result) for result in results]
 
 
 @router.get("/drivers", response_model=List[PydanticDriver])
