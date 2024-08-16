@@ -9,6 +9,9 @@
 ## Backend 
 
 - Integrate endpoints into each other
+- Tie years to filtered result data
+    - All years
+    - Not loading on first boot up
 - pictures
 - data duplication
 
