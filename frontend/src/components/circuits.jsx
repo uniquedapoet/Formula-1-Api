@@ -2,7 +2,7 @@ import React, { useState, useEffect, createRef } from "react";
 import { getCircuitData } from "./apiCalls";
 import Downshift from "downshift";
 
-const Circuits = () => {
+const Circuits = ({ onCircuitSelect }) => {
   const [circuits, setCircuits] = useState(null);
   const [selectedCircuit, setSelectedCircuit] = useState(null);
   const [circuitInputValue, setCircuitInputValue] = useState("");
@@ -27,6 +27,11 @@ const Circuits = () => {
     setSelectedCircuit(null);
   };
 
+  const handleCircuitChange = (selection) => {
+    setSelectedCircuit(selection.data);
+    onCircuitSelect(selection.data);
+  };
+
   const circuitOptions = circuits
     ? circuits.map((circuit) => ({
         value: circuit.name,
@@ -37,10 +42,10 @@ const Circuits = () => {
 
   return (
     <div>
-      <h2 style={{fontSize:"24px"}}>Select a Circuit:</h2>
+      <h2 style={{ fontSize: "24px" }}>Select a Circuit:</h2>
       <Downshift
         inputValue={circuitInputValue}
-        onChange={(selection) => setSelectedCircuit(selection.data)}
+        onChange={handleCircuitChange}
         itemToString={(item) => (item ? item.label : "")}
         onInputValueChange={setCircuitInputValue}
       >
@@ -69,7 +74,7 @@ const Circuits = () => {
                     .filter(
                       (item) => !inputValue || item.label.includes(inputValue)
                     )
-                    .slice(0, 10)
+                    .slice(0, 5)
                     .map((item, index) => (
                       <li
                         key={item.value}
@@ -94,12 +99,6 @@ const Circuits = () => {
           </div>
         )}
       </Downshift>
-      {selectedCircuit && (
-        <div>
-          <h3>Selected Circuit: {selectedCircuit.name}</h3>
-          <p>Location: {selectedCircuit.location}</p>
-        </div>
-      )}
     </div>
   );
 };

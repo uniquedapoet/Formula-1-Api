@@ -2,13 +2,14 @@ import React, { useState, useEffect, createRef } from "react";
 import { getDriverData } from "./apiCalls";
 import Downshift from "downshift";
 
-const Driver = () => {
-  const [drivers, setDrivers] = useState(null);
-  const [selectedDriver, setSelectedDriver] = useState(null);
-  const [driverInputValue, setDriverInputValue] = useState("");
-  const driverInputRef = createRef();
+const Driver = ({ onDriverSelect = () => {} }) => {
+  const [drivers, setDrivers] = useState(null); // Store driver data
+  const [selectedDriver, setSelectedDriver] = useState(null); // Store the selected driver
+  const [driverInputValue, setDriverInputValue] = useState(""); // Manage input field value
+  const driverInputRef = createRef(); // Reference for the input field
 
   useEffect(() => {
+    // Fetch driver data on component mount
     const fetchDriverData = async () => {
       try {
         const driverData = await getDriverData();
@@ -23,24 +24,33 @@ const Driver = () => {
   }, []);
 
   const clearDriver = () => {
+    // Clear the selected driver and reset the input field
     setDriverInputValue("");
     setSelectedDriver(null);
+    onDriverSelect(null); // Notify parent component of no selection
   };
 
   const driverOptions = drivers
     ? drivers.map((driver) => ({
-        value: driver.driverRef,
-        label: driver.driverRef,
-        data: driver,
+        value: driver.driverRef, // Unique identifier for the driver
+        label: driver.driverRef, // Displayed label for the dropdown
+        data: driver, // Full driver data
       }))
     : [];
 
+  const handleDriverChange = (selection) => {
+    // Update the selected driver
+    setSelectedDriver(selection.data);
+    // Notify the parent component with the selected driver data
+    onDriverSelect(selection.data);
+  };
+
   return (
     <div>
-      <h2 style={{fontSize:"24px"}}>Select a Driver:</h2>
+      <h2 style={{ fontSize: "24px" }}>Select a Driver:</h2>
       <Downshift
         inputValue={driverInputValue}
-        onChange={(selection) => setSelectedDriver(selection.data)}
+        onChange={handleDriverChange}
         itemToString={(item) => (item ? item.label : "")}
         onInputValueChange={setDriverInputValue}
       >
@@ -69,7 +79,7 @@ const Driver = () => {
                     .filter(
                       (item) => !inputValue || item.label.includes(inputValue)
                     )
-                    .slice(0, 10)
+                    .slice(0, 5) // Limit the number of suggestions
                     .map((item, index) => (
                       <li
                         key={item.value}
@@ -94,13 +104,8 @@ const Driver = () => {
           </div>
         )}
       </Downshift>
-      {selectedDriver && (
-        <div>
-          <h3 style={{fontSize:"16px"}}>Selected Driver: {selectedDriver.name}</h3>
-          <p>Team: {selectedDriver.driverRef}</p>
-        </div>
-      )}
     </div>
+
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, createRef } from "react";
 import { getResultsData } from "./apiCalls";
 import Downshift from "downshift";
 
-const Results = () => {
+const Results = ({ onResultSelect }) => {
   const [results, setResults] = useState(null);
   const [selectedResult, setSelectedResult] = useState(null);
   const [resultInputValue, setResultInputValue] = useState("");
@@ -28,6 +28,11 @@ const Results = () => {
     setSelectedResult(null);
     setResultInputValue("");
     setSelectedYear("");
+  };
+
+  const handleResultChange = (selection) => {
+    setSelectedResult(selection.data);
+    onResultSelect(selection.data);
   };
 
   const resultOptions = results
@@ -96,14 +101,12 @@ const Results = () => {
 
   return (
     <div>
-      <h2 style={{fontSize:"24px"}}>Select A Result:</h2>
+      <h2 style={{ fontSize: "24px" }}>Select A Result:</h2>
       <Downshift
         inputValue={resultInputValue}
         onInputValueChange={(inputValue) => setResultInputValue(inputValue)}
         itemToString={(item) => (item ? item.label : "")}
-        onChange={(selectedItem) => {
-          console.log("Selected item:", selectedItem);
-        }}
+        onChange={handleResultChange}
       >
         {({
           getInputProps,
@@ -130,7 +133,7 @@ const Results = () => {
                     .filter((item) =>
                       item.label.toLowerCase().includes(inputValue.toLowerCase())
                     )
-                    .slice(0, 10)
+                    .slice(0, 5)
                     .sort((a, b) => a.label.localeCompare(b.label))
                     .map((item, index) => (
                       <li
@@ -158,7 +161,7 @@ const Results = () => {
                 Optional year filter:
               </label>
               <select
-                style={{fontSize:"10px", visibility:"visible"}}
+                style={{ fontSize: "10px", visibility: "visible" }}
                 id="year-select"
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
@@ -177,13 +180,6 @@ const Results = () => {
           </div>
         )}
       </Downshift>
-
-      {selectedResult && (
-        <div>
-          <h3>Selected Result: {selectedResult.label}</h3>
-          <p>Year: {selectedResult.year}</p>
-        </div>
-      )}
     </div>
   );
 };
