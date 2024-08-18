@@ -17,11 +17,15 @@ const DriverData = ({ selectedDriver }) => {
   const gridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(6, 1fr)", // Adjust the number of columns as needed
-    gap: "10px",
+    gap: "0px",
   };
-
-  const refrence = selectedDriver ? selectedDriver.surname + " " + selectedDriver.forename : "";
-
+  
+  const paragraphStyle = {
+    marginTop: "5px", // Adjust the margin to move the content up slightly
+  };
+  
+  const reference = selectedDriver ? selectedDriver.surname + " " + selectedDriver.forename : "";
+  
   return (
     <div style={containerStyle}>
       <h2>Driver Details:</h2>
@@ -30,13 +34,15 @@ const DriverData = ({ selectedDriver }) => {
           <strong>Name:</strong>
           <strong>Nationality:</strong>
           <strong>Date Of Birth:</strong>
-          <strong>Points:</strong>
+          <strong>Team:</strong>
           <strong>Wins:</strong>
-          <strong>Wins:</strong>
-          <p>{refrence}</p>
-          <p>{selectedDriver.nationality}</p>
-          <p>{selectedDriver.dob}</p>
-          <p>{selectedDriver.points}</p>
+          <strong>Championships:</strong>
+          <p style={paragraphStyle}>{reference}</p>
+          <p style={paragraphStyle}>{selectedDriver.nationality}</p>
+          <p style={paragraphStyle}>{selectedDriver.dob}</p>
+          <p style={paragraphStyle}>{selectedDriver.dob}</p>
+          <p style={paragraphStyle}>{selectedDriver.dob}</p>
+          <p style={paragraphStyle}>{selectedDriver.dob}</p>
           {/* Add more driver details here */}
         </div>
       ) : (

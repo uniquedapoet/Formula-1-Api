@@ -4,7 +4,9 @@ import "./App.css";
 import Results from "./components/results";
 import Drivers from "./components/drivers";
 import Circuits from "./components/circuits";
-import DriverData from "./components/driverData"; // Import DriverData
+import DriverData from "./components/driverData"; 
+import CircuitData from "./components/circuitData";
+import ResultData from "./components/resultData";
 import { Helmet } from "react-helmet";
 
 function App() {
@@ -61,8 +63,7 @@ function App() {
       <DriverData selectedDriver={selectedDriver} /> {/* Pass selectedDriver to DriverData */}
       </div>
       <div className="circuit-data">
-      <p>Circuit Info:</p>
-      {/* <DriverData selectedDriver={selectedDriver} /> Pass selectedDriver to DriverData */}
+      <CircuitData selectedCircuit={selectedCircuit} />
       </div>
       <div className="circuit-picture-container">
       <p>Circuit Picture:</p>
@@ -70,7 +71,7 @@ function App() {
       </div>
       <div className="result-data">
         <p>Result Info:</p>
-      {/* <DriverData selectedDriver={selectedDriver} /> Pass selectedDriver to DriverData */}
+        <ResultData selectedResult={selectedResult} />
       </div>
     </div>
   );
