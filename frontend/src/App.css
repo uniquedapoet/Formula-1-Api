@@ -14,14 +14,38 @@
 }
 
 .App {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #338a54;
+  min-height: 99.8vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: none;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+/* Media query for small screens (e.g., mobile devices) */
+@media (max-width: 580px) {
+  .App {
+    flex-direction: column; /* Stack items vertically */
+    font-size: calc(8px + 2vmin); /* Adjust font size */
+  }
+}
+
+/* Media query for medium screens (e.g., tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .App {
+    flex-direction: row; /* Keep items in a row */
+    font-size: calc(9px + 2vmin); /* Adjust font size */
+  }
+}
+
+/* Media query for large screens (e.g., desktops) */
+@media (min-width: 1025px) {
+  .App {
+    flex-direction: row; /* Keep items in a row */
+    font-size: calc(10px + 2vmin); /* Adjust font size */
+  }
 }
 
 .App-header {
@@ -43,7 +67,7 @@
 
 .App-link {
   color: #61dafb;
-}
+} 
 
 #search-container {
   display: flex;
@@ -51,7 +75,7 @@
   margin-top: 20px;
   margin-right: auto;
   margin-left: 0%;
-  background-color: #282c34;
+  /* background-color: #282c34; */
 }
 
 .clear-button {
@@ -66,7 +90,7 @@
   flex-direction: column; /* Arrange children in a column */
   justify-content: space-between; /* Evenly space items in the column */
   margin-top: 60px; /* Adjust to match the height of the header */
-  background-color: #47C7FC;
+  /* background-color: #47C7FC; */
   width: 20%; /* Set the width to 30% of the parent container */
   height: calc(80vh - 60px); /* Full height minus the header height */
   max-height: calc(100vh - 60px); /* Full height minus the header height */
@@ -87,7 +111,7 @@
   justify-content: space-between; /* Distribute items evenly */
   padding: 10px;
   border-bottom: 1px solid #282c34;
-  background-color: #00ff2a;
+  /* background-color: #00ff2a; */
 }
 
 .circuit-data {
@@ -101,7 +125,7 @@
   justify-content: space-between; /* Evenly space items in the column */
   padding: 10px;
   border-bottom: 1px solid #282c34;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
 }
 
 .circuit-picture-container {
@@ -115,8 +139,8 @@
   flex-direction: column; /* Arrange children in a column */
   justify-content: center; /* Evenly space items in the column */
   padding: 10px;
-  background-color: #502323;
-}
+  /* background-color: #502323; */
+} */
 
 
 @keyframes App-logo-spin {
