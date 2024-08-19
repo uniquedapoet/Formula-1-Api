@@ -8,6 +8,7 @@ import DriverData from "./components/driverData";
 import CircuitData from "./components/circuitData";
 import ResultData from "./components/resultData";
 import { Helmet } from "react-helmet";
+import MapboxMap from "./components/circuitPicture";
 
 function App() {
   const [selectedDriver, setSelectedDriver] = useState(null);
