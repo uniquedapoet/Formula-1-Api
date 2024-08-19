@@ -8,7 +8,7 @@ import DriverData from "./components/driverData";
 import CircuitData from "./components/circuitData";
 import ResultData from "./components/resultData";
 import { Helmet } from "react-helmet";
-import MapboxMap from "./components/circuitPicture";
+import CircuitPicture from "./components/circuitPicture";
 
 function App() {
   const [selectedDriver, setSelectedDriver] = useState(null);
@@ -67,11 +67,10 @@ function App() {
       <CircuitData selectedCircuit={selectedCircuit} />
       </div>
       <div className="circuit-picture-container">
-      <p>Circuit Picture:</p>
+      <CircuitPicture selectedCircuit={selectedCircuit} />
       {/* <DriverData selectedDriver={selectedDriver} /> Pass selectedDriver to DriverData */}
       </div>
       <div className="result-data">
-        <p>Result Info:</p>
         <ResultData selectedResult={selectedResult} />
       </div>
     </div>
