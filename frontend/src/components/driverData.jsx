@@ -11,7 +11,7 @@ const DriverData = ({ selectedDriver }) => {
     justifyContent: "space-between", // Evenly space items in the column
     padding: "10px",
     borderBottom: "1px solid #282c34",
-    backgroundColor: "#FF8000",
+    // backgroundColor: "#FF8000",
   };
 
   const gridStyle = {

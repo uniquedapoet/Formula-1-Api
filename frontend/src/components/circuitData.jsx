@@ -12,7 +12,7 @@ const CircuitData = ({ selectedCircuit }) => {
     justifyContent: "space-between", // Evenly space items in the column
     padding: "10px",
     borderBottom: "1px solid #282c34",
-    backgroundColor: "#0048ff",
+    // backgroundColor: "#0048ff",
     zIndex: 1000,
   };
 

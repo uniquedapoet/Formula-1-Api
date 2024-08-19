@@ -13,7 +13,7 @@ const ResultData = ({ selectedResult }) => {
     justifyContent: "flex-start", // Align items at the start of the column
     padding: "10px",
     borderBottom: "1px solid #282c34",
-    backgroundColor: "#00ff2a",
+    // backgroundColor: "#00ff2a",
   };
 
   const gridStyle = {
