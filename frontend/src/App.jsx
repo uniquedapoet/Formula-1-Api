@@ -4,7 +4,7 @@ import "./App.css";
 import Results from "./components/results";
 import Drivers from "./components/drivers";
 import Circuits from "./components/circuits";
-import DriverData from "./components/driverData"; 
+import DriverData from "./components/driverData";
 import CircuitData from "./components/circuitData";
 import ResultData from "./components/resultData";
 import { Helmet } from "react-helmet";
@@ -51,24 +51,37 @@ function App() {
       </header>
       <div className="load-data-container">
         <div className="results-container">
-        <Results onResultSelect={handleResultSelect} selectedDriver={selectedDriver} selectedCircuit={selectedCircuit} />
+          <Results
+            onResultSelect={handleResultSelect}
+            selectedDriver={selectedDriver}
+            selectedCircuit={selectedCircuit}
+          />
         </div>
         <div className="drivers-container">
-        <Drivers onDriverSelect={handleDriverSelect} selectedCircuit={selectedCircuit} selectedResult={selectedResult} />
+          <Drivers
+            onDriverSelect={handleDriverSelect}
+            selectedCircuit={selectedCircuit}
+            selectedResult={selectedResult}
+          />
         </div>
         <div className="circuits-container">
-        <Circuits onCircuitSelect={handleCircuitSelect} selectedDriver={selectedDriver} selectedResult={selectedResult} />
+          <Circuits
+            onCircuitSelect={handleCircuitSelect}
+            selectedDriver={selectedDriver}
+            selectedResult={selectedResult}
+          />
         </div>
       </div>
       <div className="driver-data">
-      <DriverData selectedDriver={selectedDriver} /> {/* Pass selectedDriver to DriverData */}
+        <DriverData selectedDriver={selectedDriver} />{" "}
+        {/* Pass selectedDriver to DriverData */}
       </div>
       <div className="circuit-data">
-      <CircuitData selectedCircuit={selectedCircuit} />
+        <CircuitData selectedCircuit={selectedCircuit} />
       </div>
       <div className="circuit-picture-container">
-      <CircuitPicture selectedCircuit={selectedCircuit} />
-      {/* <DriverData selectedDriver={selectedDriver} /> Pass selectedDriver to DriverData */}
+        <CircuitPicture selectedCircuit={selectedCircuit} />
+        {/* <DriverData selectedDriver={selectedDriver} /> Pass selectedDriver to DriverData */}
       </div>
       <div className="result-data">
         <ResultData selectedResult={selectedResult} />

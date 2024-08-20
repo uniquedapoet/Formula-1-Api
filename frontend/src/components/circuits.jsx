@@ -83,9 +83,7 @@ const Circuits = ({ onCircuitSelect }) => {
                           item,
                           style: {
                             backgroundColor:
-                              highlightedIndex === index
-                                ? "lightgray"
-                                : "gray",
+                              highlightedIndex === index ? "lightgray" : "gray",
                             fontWeight:
                               selectedItem === item ? "bold" : "normal",
                           },

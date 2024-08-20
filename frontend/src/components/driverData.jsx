@@ -19,13 +19,15 @@ const DriverData = ({ selectedDriver }) => {
     gridTemplateColumns: "repeat(6, 1fr)", // Adjust the number of columns as needed
     gap: "0px",
   };
-  
+
   const paragraphStyle = {
     marginTop: "5px", // Adjust the margin to move the content up slightly
   };
-  
-  const reference = selectedDriver ? selectedDriver.surname + " " + selectedDriver.forename : "";
-  
+
+  const reference = selectedDriver
+    ? selectedDriver.surname + " " + selectedDriver.forename
+    : "";
+
   return (
     <div style={containerStyle}>
       <h2>Driver Details:</h2>

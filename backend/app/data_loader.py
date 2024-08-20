@@ -2,7 +2,6 @@ import os
 import csv
 import logging
 
-
 try:
     from db_models import Base, Circuit, Driver  # Import your models
 except ImportError:
@@ -73,7 +72,8 @@ def load_drivers_data():
     session = SessionLocal()
     try:
         for row in drivers_data:
-            pydantic_driver = pydanticDriver(**row)  # Validate data with Pydantic
+            pydantic_driver = pydanticDriver(
+                **row)  # Validate data with Pydantic
             db_driver = Driver(
                 driverRef=pydantic_driver.driverRef,
                 number=pydantic_driver.number,

@@ -131,7 +131,9 @@ const Results = ({ onResultSelect }) => {
               {isOpen
                 ? filteredResults
                     .filter((item) =>
-                      item.label.toLowerCase().includes(inputValue.toLowerCase())
+                      item.label
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
                     )
                     .slice(0, 5)
                     .sort((a, b) => a.label.localeCompare(b.label))
@@ -143,9 +145,7 @@ const Results = ({ onResultSelect }) => {
                           item,
                           style: {
                             backgroundColor:
-                              highlightedIndex === index
-                                ? "lightgray"
-                                : "gray",
+                              highlightedIndex === index ? "lightgray" : "gray",
                             fontWeight:
                               selectedItem === item ? "bold" : "normal",
                           },

@@ -67,7 +67,7 @@
 
 .App-link {
   color: #61dafb;
-} 
+}
 
 #search-container {
   display: flex;
@@ -140,10 +140,8 @@
   justify-content: center; /* Evenly space items in the column */
   padding: 10px;
   /* background-color: #502323; */
-} */
-
-
-@keyframes App-logo-spin {
+}
+*/ @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }

@@ -22,7 +22,9 @@ const ResultData = ({ selectedResult }) => {
     rowGap: "3px", // Adjust the gap between rows
   };
 
-  const reference = selectedResult ? selectedResult.surname + " " + selectedResult.forename : "";
+  const reference = selectedResult
+    ? selectedResult.surname + " " + selectedResult.forename
+    : "";
 
   const paragraphStyle = {
     marginTop: "5px", // Adjust the margin to move the content up slightly

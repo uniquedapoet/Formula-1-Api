@@ -27,7 +27,7 @@ class Circuit(BaseModel):
             lng=data["lng"],
             alt=data["alt"],
         )
-    
+
     class Config:
         orm_mode = True
 
@@ -59,10 +59,10 @@ class Driver(BaseModel):
             # podiums=podiums,
             # championships=championships
         )
-    
+
     class Config:
         orm_mode = True
-    
+
 
 class Results(BaseModel):
     raceId: int = Field(default=0, description="Race ID")
@@ -78,8 +78,6 @@ class Results(BaseModel):
     circuitname: str = Field(default="", description="Circuit name")
     date: Date = Field(default=Date.today(), description="Date of the Race")
     year: Optional[int] = Field(default=0, description="Year of the Race")
-
-
 
     @classmethod
     def from_data(cls, data):
@@ -104,6 +102,6 @@ class Results(BaseModel):
             print(f"Validation error: {e}")
             print(f"Problematic data: {data}")
             raise
-    
+
     class Config:
         orm_mode = True

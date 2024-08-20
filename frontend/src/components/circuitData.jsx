@@ -22,13 +22,13 @@ const CircuitData = ({ selectedCircuit }) => {
     gap: "5px", // Reduce the gap between grid cells
     alignItems: "center", // Align items in the center of each cell
   };
-  
+
   const headerStyle = {
     textAlign: "center",
     paddingLeft: "5px", // Adjust to move headers slightly left
     marginBottom: "2px", // Reduce space between headers and content
   };
-  
+
   const contentStyle = {
     textAlign: "center",
     paddingLeft: "5px", // Adjust to move content slightly left
