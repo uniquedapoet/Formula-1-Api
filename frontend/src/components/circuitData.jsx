@@ -52,8 +52,8 @@ const CircuitData = ({ selectedCircuit }) => {
           <p style={contentStyle}>{selectedCircuit.name}</p>
           <p style={contentStyle}>{selectedCircuit.location}</p>
           <p style={contentStyle}>{selectedCircuit.country}</p>
-          <p style={contentStyle}>{selectedCircuit.points}</p>
-          <p style={contentStyle}>{selectedCircuit.wins}</p>
+          <p style={contentStyle}>{selectedCircuit.fastestLapTime}</p>
+          <p style={contentStyle}>{selectedCircuit.fastestDriver}</p>
         </div>
       ) : (
         <p>No circuit selected.</p>
