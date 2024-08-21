@@ -12,7 +12,7 @@ const CircuitData = ({ selectedCircuit }) => {
     justifyContent: "space-between", // Evenly space items in the column
     padding: "10px",
     borderBottom: "1px solid #282c34",
-    backgroundColor: "#0048ff",
+    // backgroundColor: "#0048ff",
     zIndex: 1000,
   };
 
@@ -22,13 +22,13 @@ const CircuitData = ({ selectedCircuit }) => {
     gap: "5px", // Reduce the gap between grid cells
     alignItems: "center", // Align items in the center of each cell
   };
-  
+
   const headerStyle = {
     textAlign: "center",
     paddingLeft: "5px", // Adjust to move headers slightly left
     marginBottom: "2px", // Reduce space between headers and content
   };
-  
+
   const contentStyle = {
     textAlign: "center",
     paddingLeft: "5px", // Adjust to move content slightly left
@@ -52,8 +52,8 @@ const CircuitData = ({ selectedCircuit }) => {
           <p style={contentStyle}>{selectedCircuit.name}</p>
           <p style={contentStyle}>{selectedCircuit.location}</p>
           <p style={contentStyle}>{selectedCircuit.country}</p>
-          <p style={contentStyle}>{selectedCircuit.points}</p>
-          <p style={contentStyle}>{selectedCircuit.wins}</p>
+          <p style={contentStyle}>{selectedCircuit.fastestLapTime}</p>
+          <p style={contentStyle}>{selectedCircuit.fastestDriver}</p>
         </div>
       ) : (
         <p>No circuit selected.</p>

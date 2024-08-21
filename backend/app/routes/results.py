@@ -1,13 +1,16 @@
+import logging
 from fastapi import APIRouter, HTTPException, Depends, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import text as sqltext
 from app.database import SessionLocal
 from typing import List, Optional
 from app.models.db_models import Results as DBResult  # Import the SQLAlchemy model
-from app.models.pydantic_model import Results as PydanticResults  # Import the Pydantic model
+# Import the Pydantic model
+from app.models.pydantic_model import Results as PydanticResults
 
 
 router = APIRouter()
+
 
 def get_db():
     db = SessionLocal()
@@ -44,20 +47,21 @@ def get_result_year(year: int, db: Session = Depends(get_db)):
         FROM results
         WHERE year = :year
         ORDER BY circuitname
-    """)   
+    """)
     results = db.execute(query, {"year": year}).fetchall()
     if not results:
         raise HTTPException(status_code=404, detail="Result not found")
-    
+
     return [PydanticResults.from_orm(result) for result in results]
 
 
-import logging
 @router.get("/query/results", response_model=List[PydanticResults])
 def get_results(
-    circuitRef: Optional[str] = Query(None, description="Filter by circuit reference"),
+    circuitRef: Optional[str] = Query(
+        None, description="Filter by circuit reference"),
     driver: Optional[str] = Query(None, description="Filter by driver"),
-    nationality: Optional[str] = Query(None, description="Filter by nationality"),
+    nationality: Optional[str] = Query(
+        None, description="Filter by nationality"),
     db: Session = Depends(get_db),
 ):
     query = db.query(DBResult)

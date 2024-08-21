@@ -12,7 +12,13 @@ class Circuit(BaseModel):
     lat: float = Field(default=0.0, description="Circuit latitude")
     lng: float = Field(default=0.0, description="Circuit longitude")
     alt: float = Field(default=0.0, description="Circuit altitude")
-    fastest_lap: str = Field(default=None, description="Fastest lap time")
+    url: str = Field(default="", description="Circuit URL")
+    circuitLength: float = Field(default=0.0, description="Circuit length in KM")
+    fastestDriver: str = Field(default=None, description="Fastest driver")
+    fastestYear: float = Field(default=None, description="Fastest year")
+    laps: float = Field(default=None, description="Laps")
+    raceDistance: float = Field(default=None, description='Race Distance')
+    fastestLapTime: float = Field(default=None, description="Fastest lap time")
 
     @classmethod
     def from_data(cls, data):
@@ -26,8 +32,15 @@ class Circuit(BaseModel):
             lat=data["lat"],
             lng=data["lng"],
             alt=data["alt"],
+            url=data["url"],
+            circuitLength=data["circuitLength(KM)"],
+            fastestDriver=data["fastestDriver"],
+            fastestYear=data["fastestYear"],
+            laps=data["laps"],
+            raceDistance=data["raceDistance"],
+            fastestLapTime=data["fastestLapTime"]
         )
-    
+
     class Config:
         orm_mode = True
 
@@ -59,10 +72,10 @@ class Driver(BaseModel):
             # podiums=podiums,
             # championships=championships
         )
-    
+
     class Config:
         orm_mode = True
-    
+
 
 class Results(BaseModel):
     raceId: int = Field(default=0, description="Race ID")
@@ -78,8 +91,6 @@ class Results(BaseModel):
     circuitname: str = Field(default="", description="Circuit name")
     date: Date = Field(default=Date.today(), description="Date of the Race")
     year: Optional[int] = Field(default=0, description="Year of the Race")
-
-
 
     @classmethod
     def from_data(cls, data):
@@ -104,6 +115,6 @@ class Results(BaseModel):
             print(f"Validation error: {e}")
             print(f"Problematic data: {data}")
             raise
-    
+
     class Config:
         orm_mode = True
