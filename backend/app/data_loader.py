@@ -49,7 +49,13 @@ def load_circuits_data():
                 lat=pydantic_circuit.lat,
                 lng=pydantic_circuit.lng,
                 alt=pydantic_circuit.alt,
-                fastest_lap=pydantic_circuit.fastest_lap,
+                url=pydantic_circuit.url,
+                circuitLength=pydantic_circuit.circuitLength,
+                fastestDriver=pydantic_circuit.fastestDriver,
+                fastestYear=pydantic_circuit.fastestYear,
+                laps=pydantic_circuit.laps,
+                raceDistance=pydantic_circuit.raceDistance,
+                fastestLapTime=pydantic_circuit.fastestLapTime
             )  # Convert to SQLAlchemy model
             session.add(db_circuit)
         session.commit()
@@ -136,6 +142,6 @@ def load_results_data():
 
 
 if __name__ == "__main__":
-    # load_circuits_data()
-    # load_drivers_data()
+    load_circuits_data()
+    load_drivers_data()
     load_results_data()
