@@ -14,7 +14,13 @@ class Circuit(Base):
     lat = Column(Float)
     lng = Column(Float)
     alt = Column(Float)
-    fastest_lap = Column(String, nullable=True)
+    url = Column(String)
+    circuitLength = Column(Float, nullable=True)
+    fastestDriver = Column(String, nullable=True)
+    fastestYear = Column(Float, nullable=True)
+    laps = Column(Float, nullable=True)
+    raceDistance = Column(Float, nullable=True)
+    fastestLapTime = Column(Float, nullable=True)
 
 
 class Driver(Base):
