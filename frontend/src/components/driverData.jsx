@@ -3,10 +3,10 @@ import React from "react";
 const DriverData = ({ selectedDriver }) => {
   const containerStyle = {
     position: "fixed",
-    top: "88px", // Adjust to match the height of the header
+    top: "94px", // Adjust to match the height of the header
     left: "20%", // Start right next to the load-data-container
     width: "80%", 
-    hiegth: "100%",
+    height: "119px", // Set a fixed height
     display: "flex",
     flexDirection: "column", // Arrange children in a column
     justifyContent: "space-between", // Evenly space items in the column
@@ -15,6 +15,7 @@ const DriverData = ({ selectedDriver }) => {
     font: "16px Arial, sans-serif",
     border: "1px solid #000000",
     color:"#282c34",
+    overflowY: "auto", // Add vertical scroll if content exceeds height
   };
 
   const gridStyle = {

@@ -41,6 +41,17 @@ const CircuitData = ({ selectedCircuit }) => {
   const refrence = selectedCircuit
     ? selectedCircuit.surname + " " + selectedCircuit.forename
     : "";
+  
+  const formatTime = (totalSeconds) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = (totalSeconds % 60).toFixed(3);
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  };
+  
+  // Example usage
+  const fastestLapTimeInSeconds = selectedCircuit ? selectedCircuit.fastestLapTime : 0;
+  const formattedFastestLapTime = formatTime(fastestLapTimeInSeconds);
+  
 
   return (
     <div style={containerStyle}>
@@ -55,7 +66,7 @@ const CircuitData = ({ selectedCircuit }) => {
           <p style={contentStyle}>{selectedCircuit.name}</p>
           <p style={contentStyle}>{selectedCircuit.location}</p>
           <p style={contentStyle}>{selectedCircuit.country}</p>
-          <p style={contentStyle}>{selectedCircuit.fastestLapTime}</p>
+          <p style={contentStyle}>{formattedFastestLapTime}</p>
           <p style={contentStyle}>{selectedCircuit.fastestDriver}</p>
         </div>
       ) : (

@@ -148,7 +148,7 @@
   top: 80px; /* Adjust to match the height of the header */
   left: 20%; /* Start right next to the load-data-container */
   width: 80%;
-  height: 20%;
+  height: 18%;
   display: flex;
   flex-direction: column; /* Arrange children in a column */
   justify-content: space-between; /* Evenly space items in the column */
@@ -158,7 +158,7 @@
   color: #282c34;
 }
 
-*/ @keyframes App-logo-spin {
+* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }

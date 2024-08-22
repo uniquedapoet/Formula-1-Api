@@ -8,10 +8,10 @@
 
 ## Backend 
 
-- Integrate endpoints into each other
-- Integrate data into thier proper spots
-- pictures
-- data duplication
+- Championships
+- Wins
+- position
+- teams
 
 
 ## Outstanding Issues
