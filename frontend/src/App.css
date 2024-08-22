@@ -14,7 +14,7 @@
 }
 
 .App {
-  background-color: #338a54;
+  background-color: #af0034;
   min-height: 99.8vh;
   display: flex;
   flex-direction: row;
@@ -105,42 +105,59 @@
   bottom: 0px; /* Adjust to match the height of the header */
   left: 20%; /* Start right next to the load-data-container */
   width: 10%; /* Take the remaining width */
-  height: 67.5%; /* Take the remaining width */
+  height: 70.5%; /* Take the remaining width */
   display: flex;
   flex-direction: column; /* Arrange children in a row */
   justify-content: space-between; /* Distribute items evenly */
   padding: 10px;
-  border-bottom: 1px solid #282c34;
-  /* background-color: #00ff2a; */
+  /* background-color: #c9e911; */
 }
 
 .circuit-data {
   position: fixed;
   bottom: 0px; /* Adjust to match the height of the header */
-  left: 20%; /* Start right next to the load-data-container */
+  left: 20%; /* Adjusted to move the container slightly left */
   width: 80%; /* Take the remaining width */
-  height: 15%; /* Take the remaining width */
+  height: 21%; /* Take the remaining height */
   display: flex;
   flex-direction: column; /* Arrange children in a column */
   justify-content: space-between; /* Evenly space items in the column */
   padding: 10px;
-  border-bottom: 1px solid #282c34;
-  /* background-color: #ffffff; */
+  background-color: #ffffee;
+  z-index: 1000;
+  font: 16px Arial, sans-serif;
+  color: #282c34;
 }
 
 .circuit-picture-container {
   z-index: 1000;
   position: fixed;
-  bottom: 175px; /* Adjust to match the height of the header */
+  bottom: 250px; /* Adjust to match the height of the header */
   left: 30%; /* Start right next to the load-data-container */
   width: 70%; /* Take the remaining width */
-  height: 50%; /* Take the remaining width */
+  height: 45%; /* Take the remaining width */
   display: flex;
   flex-direction: column; /* Arrange children in a column */
   justify-content: center; /* Evenly space items in the column */
   padding: 10px;
   /* background-color: #502323; */
 }
+
+.driver-data {
+  position: fixed;
+  top: 80px; /* Adjust to match the height of the header */
+  left: 20%; /* Start right next to the load-data-container */
+  width: 80%;
+  height: 20%;
+  display: flex;
+  flex-direction: column; /* Arrange children in a column */
+  justify-content: space-between; /* Evenly space items in the column */
+  padding: 10px;
+  background-color: #ffffee;
+  font: 16px Arial, sans-serif;
+  color: #282c34;
+}
+
 */ @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

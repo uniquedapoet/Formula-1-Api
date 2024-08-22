@@ -33,6 +33,7 @@ function App() {
     // Notify other components if needed
   };
 
+
   return (
     <div className="App">
       <Helmet>
@@ -53,6 +54,7 @@ function App() {
         <div className="results-container">
           <Results
             onResultSelect={handleResultSelect}
+            Driver={selectedDriver}
             selectedDriver={selectedDriver}
             selectedCircuit={selectedCircuit}
           />
