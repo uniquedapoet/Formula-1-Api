@@ -3,24 +3,27 @@ import React from "react";
 const CircuitData = ({ selectedCircuit }) => {
   const containerStyle = {
     position: "fixed",
-    bottom: "0px", // Adjust to match the height of the header
-    left: "31%", // Adjusted to move the container slightly left
-    width: "68%", // Take the remaining width
+    bottom: "32px", // Adjust to match the height of the header
+    left: "20%", // Adjusted to move the container slightly left
+    width: "80%", // Take the remaining width
     height: "15%", // Take the remaining height
     display: "flex",
     flexDirection: "column", // Arrange children in a column
     justifyContent: "space-between", // Evenly space items in the column
     padding: "10px",
-    borderBottom: "1px solid #282c34",
-    // backgroundColor: "#0048ff",
+    border: "1px solid #000000",
+    backgroundColor: "#ffffee",
     zIndex: 1000,
+    font: "16px Arial, sans-serif",
+    color:"#282c34",
   };
 
   const gridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(5, 1fr)", // Adjust the number of columns as needed
     gap: "5px", // Reduce the gap between grid cells
-    alignItems: "center", // Align items in the center of each cell
+    alignItems: "center", 
+    height: "100%",
   };
 
   const headerStyle = {
@@ -28,11 +31,11 @@ const CircuitData = ({ selectedCircuit }) => {
     paddingLeft: "5px", // Adjust to move headers slightly left
     marginBottom: "2px", // Reduce space between headers and content
   };
-
+  
   const contentStyle = {
     textAlign: "center",
     paddingLeft: "5px", // Adjust to move content slightly left
-    margin: "-10px", // Remove margin to move content closer to the header
+    margin: "-5%", // Remove margin to move content closer to the header
   };
 
   const refrence = selectedCircuit
@@ -41,7 +44,7 @@ const CircuitData = ({ selectedCircuit }) => {
 
   return (
     <div style={containerStyle}>
-      <h2 style={{ margin: "-10px 0 05px 10px" }}>Circuit Details:</h2>
+      <h2 style={{ marginBottom:'5px' }}>Circuit Details:</h2>
       {selectedCircuit ? (
         <div style={gridStyle}>
           <strong style={headerStyle}>Circuit Name:</strong>
