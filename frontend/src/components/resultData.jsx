@@ -4,7 +4,7 @@ const ResultData = ({ selectedResult }) => {
   const containerStyle = {
     zIndex: 1000,
     position: "fixed",
-    bottom: "175px", // Adjust to match the height of the header
+    top: "calc(78px + 18% + 10px)", // Position below the driver-data container
     left: "20%", // Start right next to the load-data-container
     width: "10%", // Take the remaining width
     height: "47%", // Take the remaining height

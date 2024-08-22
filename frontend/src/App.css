@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  position: relative;
+  overflow-y: auto;
 }
 
 .App-logo {
@@ -132,15 +134,15 @@
 .circuit-picture-container {
   z-index: 1000;
   position: fixed;
-  bottom: 250px; /* Adjust to match the height of the header */
+  top: calc(78px + 18% + 10px);
   left: 30%; /* Start right next to the load-data-container */
   width: 70%; /* Take the remaining width */
-  height: 45%; /* Take the remaining width */
+  height: 47%; /* Take the remaining height */
   display: flex;
   flex-direction: column; /* Arrange children in a column */
-  justify-content: center; /* Evenly space items in the column */
+  justify-content: center;
+  background-color: #b8b823;
   padding: 10px;
-  /* background-color: #502323; */
 }
 
 .driver-data {
@@ -156,6 +158,10 @@
   background-color: #ffffee;
   font: 16px Arial, sans-serif;
   color: #282c34;
+}
+
+.data-display {
+  position: relative;
 }
 
 * @keyframes App-logo-spin {

@@ -33,7 +33,6 @@ function App() {
     // Notify other components if needed
   };
 
-
   return (
     <div className="App">
       <Helmet>
@@ -74,19 +73,21 @@ function App() {
           />
         </div>
       </div>
-      <div className="driver-data">
-        <DriverData selectedDriver={selectedDriver} />{" "}
-        {/* Pass selectedDriver to DriverData */}
-      </div>
-      <div className="circuit-data">
-        <CircuitData selectedCircuit={selectedCircuit} />
-      </div>
-      <div className="circuit-picture-container">
-        <CircuitPicture selectedCircuit={selectedCircuit} />
-        {/* <DriverData selectedDriver={selectedDriver} /> Pass selectedDriver to DriverData */}
-      </div>
-      <div className="result-data">
-        <ResultData selectedResult={selectedResult} />
+      <div style={{position:'absolute', width:'100%', height:'auto', padding:'10px', overflowY:'auto'}} className="data-display">
+        <div className="driver-data">
+          <DriverData selectedDriver={selectedDriver} />{" "}
+          {/* Pass selectedDriver to DriverData */}
+        </div>
+        <div className="circuit-data">
+          <CircuitData selectedCircuit={selectedCircuit} />
+        </div>
+        <div className="circuit-picture-container">
+          <CircuitPicture selectedCircuit={selectedCircuit} />
+          {/* <DriverData selectedDriver={selectedDriver} /> Pass selectedDriver to DriverData */}
+        </div>
+        <div className="result-data">
+          <ResultData selectedResult={selectedResult} />
+        </div>
       </div>
     </div>
   );
