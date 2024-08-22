@@ -22,9 +22,15 @@ export const getCircuitData = async () => {
   }
 };
 
-export const getResultsData = async () => {
+export const getResultsData = async ({ Driver }) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/results`);
+    console.log("Drivernnnn:", Driver);
+    let response;
+    if (Driver === null) {
+      response = await axios.get(`${API_BASE_URL}/results`);
+    } else {
+      response = await axios.get(`${API_BASE_URL}/results/driver/${Driver['driverRef']}`);
+    }
     return response.data;
   } catch (error) {
     console.error("Error fetching result data:", error);

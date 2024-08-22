@@ -2,7 +2,7 @@ import React, { useState, useEffect, createRef } from "react";
 import { getResultsData } from "./apiCalls";
 import Downshift from "downshift";
 
-const Results = ({ onResultSelect }) => {
+const Results = ({ onResultSelect, Driver }) => {
   const [results, setResults] = useState(null);
   const [selectedResult, setSelectedResult] = useState(null);
   const [resultInputValue, setResultInputValue] = useState("");
@@ -13,7 +13,7 @@ const Results = ({ onResultSelect }) => {
   useEffect(() => {
     const fetchResultsData = async () => {
       try {
-        const resultData = await getResultsData();
+        const resultData = await getResultsData(Driver={Driver});
         console.log("Result Data:", resultData);
         setResults(resultData);
       } catch (error) {
@@ -22,7 +22,7 @@ const Results = ({ onResultSelect }) => {
     };
 
     fetchResultsData();
-  }, []);
+  }, [Driver]);
 
   const clearResult = () => {
     setSelectedResult(null);
