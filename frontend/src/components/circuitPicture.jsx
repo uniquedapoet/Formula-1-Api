@@ -30,16 +30,18 @@ const CircuitPicture = ({ selectedCircuit }) => {
     height: "47%", // Take the remaining height
     display: "flex",
     flexDirection: "column", // Arrange children in a column
+    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ffffee",
+    backgroundColor: "#cfcfc4",
     padding: "10px",
+    borderRadius: "10px", 
   };
 
   return (
     <div style={circuitPictureContainerStyle}>
       <img
         src={imageUrl}
-        style={{ height: "100%" }}
+        style={{ height: "100%", width: "96%" }}
         alt={`No Picture For ${circuit}`}
       />
     </div>

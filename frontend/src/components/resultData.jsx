@@ -24,13 +24,11 @@ const ResultData = ({ selectedResult }) => {
     rowGap: "3px", // Adjust the gap between rows
   };
 
-  const reference = selectedResult
-    ? selectedResult.surname + " " + selectedResult.forename
-    : "";
-
   const paragraphStyle = {
     marginTop: "5px", // Adjust the margin to move the content up slightly
   };
+
+  console.log("Rendering ResultData with selectedResult:", selectedResult);
 
   return (
     <div style={containerStyle}>
@@ -55,4 +53,11 @@ const ResultData = ({ selectedResult }) => {
   );
 };
 
-export default ResultData;
+const clearData = (setSelectedResult) => {
+  setSelectedResult(null);
+  console.log("Result data cleared.");
+};
+
+const exports = { ResultData, clearData }
+
+export default exports;

@@ -80,6 +80,7 @@
   /* background-color: #282c34; */
 }
 
+
 .clear-button {
   background-color: #282c34;
   color: white;
@@ -87,12 +88,26 @@
   cursor: pointer;
 }
 
+.clear-all {
+  z-index: 1000;
+  position: fixed;
+  bottom: 120px; /* Adjust to match the height of the header */
+  left: 21%; /* Start right next to the load-data-container */
+  width: 10%; /* Take the remaining width */
+  height: 5%; /* Take the remaining width */
+  display: flex;
+  flex-direction: column; /* Arrange children in a row */
+  justify-content: space-between; /* Distribute items evenly */
+  padding: 10px;
+  background-color: #cfcfc4;
+}
+
 .load-data-container {
   display: flex;
   flex-direction: column; /* Arrange children in a column */
   justify-content: space-between; /* Evenly space items in the column */
   margin-top: 60px; /* Adjust to match the height of the header */
-  /* background-color: #47C7FC; */
+  /* background-color: #4cb5ff;  */
   width: 20%; /* Set the width to 30% of the parent container */
   height: calc(80vh - 60px); /* Full height minus the header height */
   max-height: calc(100vh - 60px); /* Full height minus the header height */
@@ -141,7 +156,7 @@
   display: flex;
   flex-direction: column; /* Arrange children in a column */
   justify-content: center;
-  background-color: #b8b823;
+  background-color: #cfcfc4;
   padding: 10px;
 }
 

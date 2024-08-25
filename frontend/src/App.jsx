@@ -6,10 +6,11 @@ import Drivers from "./components/drivers";
 import Circuits from "./components/circuits";
 import DriverData from "./components/driverData";
 import CircuitData from "./components/circuitData";
-import ResultData from "./components/resultData";
+import resultDataExports from "./components/resultData";
 import { Helmet } from "react-helmet";
 import CircuitPicture from "./components/circuitPicture";
 
+const { ResultData } = resultDataExports; // Destructure ResultData from the default export object
 function App() {
   const [selectedDriver, setSelectedDriver] = useState(null);
   const [selectedCircuit, setSelectedCircuit] = useState(null);
@@ -31,6 +32,13 @@ function App() {
     setSelectedResult(result);
     console.log("Result selected:", result);
     // Notify other components if needed
+  };
+
+  const clearAll = () => {
+    setSelectedDriver(null);
+    setSelectedCircuit(null);
+    setSelectedResult(null);
+    console.log("All data cleared.");
   };
 
   return (
@@ -73,7 +81,16 @@ function App() {
           />
         </div>
       </div>
-      <div style={{position:'absolute', width:'100%', height:'auto', padding:'10px', overflowY:'auto'}} className="data-display">
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "auto",
+          padding: "10px",
+          overflowY: "auto",
+        }}
+        className="data-display"
+      >
         <div className="driver-data">
           <DriverData selectedDriver={selectedDriver} />{" "}
           {/* Pass selectedDriver to DriverData */}
@@ -88,6 +105,7 @@ function App() {
         <div className="result-data">
           <ResultData selectedResult={selectedResult} />
         </div>
+        <button onClick={clearAll} className="clear-all">Clear All</button>
       </div>
     </div>
   );
