@@ -40,6 +40,19 @@ def get_result_date(date: str, db: Session = Depends(get_db)):
     return [PydanticResults.from_orm(result) for result in results]
 
 
+@router.get("/results/driver/{driver}", response_model=List[PydanticResults])
+def get_result_driver(driver: str, db: Session = Depends(get_db)):
+    query = sqltext("""  
+        SELECT * FROM results
+        WHERE "driverRef" = :driverRef;
+    """)
+    results = db.execute(query, {"driverRef": driver}).fetchall()
+    if not results:
+        raise HTTPException(status_code=404, detail="Result not found")
+
+    return [PydanticResults.from_orm(result) for result in results]
+
+
 @router.get("/results/years/{year}", response_model=List[PydanticResults])
 def get_result_year(year: int, db: Session = Depends(get_db)):
     query = sqltext("""  

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, createRef } from "react";
 import { getResultsData } from "./apiCalls";
 import Downshift from "downshift";
+import resultDataExports from "./resultData"; // Import the default export object
+const { clearData } = resultDataExports; // Destructure clearData from the default export object
 
-const Results = ({ onResultSelect }) => {
+const Results = ({ onResultSelect, Driver }) => {
   const [results, setResults] = useState(null);
   const [selectedResult, setSelectedResult] = useState(null);
   const [resultInputValue, setResultInputValue] = useState("");
@@ -13,7 +15,7 @@ const Results = ({ onResultSelect }) => {
   useEffect(() => {
     const fetchResultsData = async () => {
       try {
-        const resultData = await getResultsData();
+        const resultData = await getResultsData(Driver={Driver});
         console.log("Result Data:", resultData);
         setResults(resultData);
       } catch (error) {
@@ -22,10 +24,11 @@ const Results = ({ onResultSelect }) => {
     };
 
     fetchResultsData();
-  }, []);
+  }, [Driver]);
 
   const clearResult = () => {
-    setSelectedResult(null);
+    clearData(setSelectedResult); // Pass the setter function
+    // setSelectedResult(null);
     setResultInputValue("");
     setSelectedYear("");
   };

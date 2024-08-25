@@ -4,16 +4,18 @@ const ResultData = ({ selectedResult }) => {
   const containerStyle = {
     zIndex: 1000,
     position: "fixed",
-    bottom: "0px", // Adjust to match the height of the header
+    top: "calc(78px + 18% + 10px)", // Position below the driver-data container
     left: "20%", // Start right next to the load-data-container
     width: "10%", // Take the remaining width
-    height: "67.5%", // Take the remaining height
+    height: "47%", // Take the remaining height
     display: "flex",
     flexDirection: "column", // Arrange children in a column
-    justifyContent: "flex-start", // Align items at the start of the column
+    justifyContent: "center", // Align items at the start of the column
     padding: "10px",
-    borderBottom: "1px solid #282c34",
-    // backgroundColor: "#00ff2a",
+    border: "1px solid #000000",
+    backgroundColor: "#ffffee",
+    font: "16px Arial, sans-serif", 
+    color:"#282c34",
   };
 
   const gridStyle = {
@@ -22,29 +24,27 @@ const ResultData = ({ selectedResult }) => {
     rowGap: "3px", // Adjust the gap between rows
   };
 
-  const reference = selectedResult
-    ? selectedResult.surname + " " + selectedResult.forename
-    : "";
-
   const paragraphStyle = {
     marginTop: "5px", // Adjust the margin to move the content up slightly
   };
 
+  console.log("Rendering ResultData with selectedResult:", selectedResult);
+
   return (
     <div style={containerStyle}>
-      <h2 style={{ margin: "0" }}>Result Details:</h2>
+      <h2 style={{ margin: "0", fontSize:"20px" }}>Result Details:</h2>
       {selectedResult ? (
         <div style={gridStyle}>
           <strong>Race Name:</strong>
           <p style={paragraphStyle}>{selectedResult.circuitname}</p>
-          <strong>Laps:</strong>
-          <p style={paragraphStyle}>{selectedResult.nationality}</p>
           <strong>Date:</strong>
           <p style={paragraphStyle}>{selectedResult.date}</p>
-          <strong>Points:</strong>
-          <p style={paragraphStyle}>{selectedResult.points}</p>
-          <strong>Podium:</strong>
-          <p style={paragraphStyle}>{selectedResult.wins}</p>
+          <strong>Time:</strong>
+          <p style={paragraphStyle}>{selectedResult.time}</p>
+          <strong>Fastest Lap:</strong>
+          <p style={paragraphStyle}>{selectedResult.fastestLapTime}</p>
+          <strong>Position:</strong>
+          <p style={paragraphStyle}>{selectedResult.driverId}</p>
         </div>
       ) : (
         <p>No result selected.</p>
@@ -53,4 +53,11 @@ const ResultData = ({ selectedResult }) => {
   );
 };
 
-export default ResultData;
+const clearData = (setSelectedResult) => {
+  setSelectedResult(null);
+  console.log("Result data cleared.");
+};
+
+const exports = { ResultData, clearData }
+
+export default exports;

@@ -24,22 +24,25 @@ const CircuitPicture = ({ selectedCircuit }) => {
   const circuitPictureContainerStyle = {
     zIndex: 1000,
     position: "fixed",
-    bottom: "140px", // Adjust to match the height of the header
+    top: "calc(78px + 18% + 10px)",
     left: "30%", // Start right next to the load-data-container
     width: "70%", // Take the remaining width
-    height: "50%", // Take the remaining width
+    height: "47%", // Take the remaining height
     display: "flex",
     flexDirection: "column", // Arrange children in a column
-    justifyContent: "center", // Evenly space items in the column
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#cfcfc4",
     padding: "10px",
+    borderRadius: "10px", 
   };
 
   return (
     <div style={circuitPictureContainerStyle}>
       <img
         src={imageUrl}
-        style={{ height: "100%" }}
-        alt={`Selected circuit: ${selectedCircuit.name}`}
+        style={{ height: "100%", width: "96%" }}
+        alt={`No Picture For ${circuit}`}
       />
     </div>
   );
