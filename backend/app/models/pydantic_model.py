@@ -91,6 +91,7 @@ class Results(BaseModel):
     circuitname: str = Field(default="", description="Circuit name")
     date: Date = Field(default=Date.today(), description="Date of the Race")
     year: Optional[int] = Field(default=0, description="Year of the Race")
+    winner: bool = Field(default=False, description="Boolean describing if the driver Won")
 
     @classmethod
     def from_data(cls, data):
@@ -109,7 +110,8 @@ class Results(BaseModel):
                 circuitId=data["circuitId"],
                 circuitname=data["circuitname"],
                 date=data["date"],
-                year=data["year"]
+                year=data["year"],
+                winner=data["is_winner"]
             )
         except ValidationError as e:
             print(f"Validation error: {e}")
