@@ -6,13 +6,11 @@
 ## Backend 
 
 - Championships
-- Wins
 - position
 - teams
-- clear button
 
 
 ## Outstanding Issues
-- Data not loading on first boot uo for year seleect.
+- Data not loading on first boot uo for year select.
     - Cannot use result search until year is first selected
 
