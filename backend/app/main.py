@@ -45,6 +45,7 @@ async def lifespan(app: FastAPI):
         print("Data loaded!")
     else:
         print("Data already loaded within the last hour.")
+        print("Last load time:", last_load_time)
         load_results_data()
     yield
 

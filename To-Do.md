@@ -6,7 +6,6 @@
 ## Backend 
 
 - Championships
-- Wins
 - position
 - teams
 - clear button
