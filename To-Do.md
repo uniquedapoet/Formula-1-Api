@@ -8,7 +8,6 @@
 - Championships
 - position
 - teams
-- clear button
 
 
 ## Outstanding Issues

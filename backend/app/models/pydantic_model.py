@@ -113,7 +113,7 @@ class Results(BaseModel):
                 date=data["date"],
                 year=data["year"],
                 winner=data["is_winner"],
-                seasonWins=data["seasonWins"],
+                seasonWins=data.get("seasonWins", 0)  # Provide default value if key is missing
             )
         except ValidationError as e:
             print(f"Validation error: {e}")
