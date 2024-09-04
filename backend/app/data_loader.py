@@ -129,7 +129,9 @@ def load_results_data():
                 circuitId=pydantic_result.circuitId,
                 circuitname=pydantic_result.circuitname,
                 date=pydantic_result.date,
-                year=pydantic_result.year
+                year=pydantic_result.year,
+                isWinner=pydantic_result.isWinner,
+                seasonWins=pydantic_result.seasonWins
             )
             session.merge(db_result)
         session.commit()

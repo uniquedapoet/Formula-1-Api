@@ -91,12 +91,17 @@ class Results(BaseModel):
     circuitname: str = Field(default="", description="Circuit name")
     date: Date = Field(default=Date.today(), description="Date of the Race")
     year: Optional[int] = Field(default=0, description="Year of the Race")
-    winner: bool = Field(default=False, description="Winner of Race")
+    isWinner: bool = Field(default=False, description="Boolean describing if the driver Won")
+    seasonWins: int = Field(default=0, description="Number of wins in the season")
 
     @classmethod
     def from_data(cls, data):
         """Class method to create a driver instance from raw data"""
         try:
+            is_winner = data["isWinner"]
+            if isinstance(is_winner, str):
+                is_winner = is_winner.lower() in ["true", "1", "yes"]
+
             return cls(
                 raceID=data["raceId"],
                 driverId=data["driverId"],
@@ -111,7 +116,8 @@ class Results(BaseModel):
                 circuitname=data["circuitname"],
                 date=data["date"],
                 year=data["year"],
-                winner=data["is_winner"]
+                isWinner=data.get("isWinner", True),  
+                seasonWins=data.get("seasonWins", 0)  # Provide default value if key is missing
             )
         except ValidationError as e:
             print(f"Validation error: {e}")
