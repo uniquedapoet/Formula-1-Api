@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, Date
+from sqlalchemy import Column, Integer, String, Float, Date, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -53,3 +53,4 @@ class Results(Base):
     circuitname = Column(String)
     date = Column(Date)
     year = Column(Integer)
+    seasonWins = Column(Integer)
