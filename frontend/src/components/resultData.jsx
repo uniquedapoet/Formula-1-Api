@@ -43,8 +43,8 @@ const ResultData = ({ selectedResult }) => {
           <p style={paragraphStyle}>{selectedResult.time}</p>
           <strong>Fastest Lap:</strong>
           <p style={paragraphStyle}>{selectedResult.fastestLapTime}</p>
-          <strong>Position:</strong>
-          <p style={paragraphStyle}>{selectedResult.driverId}</p>
+          <strong>Points:</strong>
+          <p style={paragraphStyle}>{selectedResult.points}</p>
         </div>
       ) : (
         <p>No result selected.</p>

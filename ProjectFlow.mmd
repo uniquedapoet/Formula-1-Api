@@ -1,23 +1,27 @@
-``` mermaid
 graph TD
+
     %% Frontend Section
+    subgraph Frontend
     A[User] -->|Makes Request| B[React Frontend]
     B --> C[Request to API via Fetch/Axios]
+    end
 
     %% Backend Section
+    subgraph Backend
     C --> D[FastAPI Backend]
     D --> E{API Route Matching}
-
-    %% Request Flow Logic
     E -->|Driver Data| F[Drivers Endpoint: /drivers]
     E -->|Circuit Data| G[Circuits Endpoint: /circuits]
     E -->|Race Results| H[Results Endpoint: /results]
     E -->|Invalid Request| X[Error Response to Frontend]
+    end
 
     %% Database Interaction
+    subgraph Database
     F --> I[Query Drivers Table in Database]
     G --> J[Query Circuits Table in Database]
     H --> K[Query Results Table in Database]
+    end
 
     %% Response Flow
     I --> L[Return Drivers Data to FastAPI]
@@ -36,4 +40,13 @@ graph TD
     %% API Error Handling
     X --> Y[Return Error Message to Frontend]
     Y --> Z[Display Error on UI]
-```
+
+    %% Styling
+    classDef important fill:#f96,stroke:#333,stroke-width:4px;
+    classDef backend fill:#bbf,stroke:#000,stroke-width:2px;
+    classDef database fill:#d6f5d6,stroke:#000,stroke-width:2px;
+    classDef filter fill:#ffd700,stroke:#333,stroke-width:2px;
+    class F,G,H backend;
+    class I,J,K database;
+    class P,Q important;
+    class A1,F1,F2,F3,L1,L2,L3,M1,M2,M3 filter;
