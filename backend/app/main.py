@@ -5,8 +5,7 @@ from app.data_loader import load_circuits_data, load_drivers_data, load_results_
 from datetime import datetime, timedelta
 from contextlib import asynccontextmanager
 import uvicorn
-import sys
-import os
+import sys, os
 from . import last_load_time  # Import the variable from __init__.py
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -31,25 +30,23 @@ app.include_router(results.router)
 def read_root():
     return {"message": "Hello World"}
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global last_load_time
     start_time = datetime.now()
-    load_circuits_data()
-    load_drivers_data()
-    load_results_data()
     print("Starting up...", start_time.hour)
+   
     # Check if an hour has passed since the last load time
-    # if start_time - last_load_time >= timedelta(hours=1):
-    #     load_circuits_data()
-    #     load_drivers_data()
-    #     load_results_data()
-    #     last_load_time = datetime.now()  # Update the global variable
-    #     print("Data loaded!")
-    # else:
-    #     print("Data already loaded within the last hour.")
-
+    if start_time - last_load_time >= timedelta(hours=1):
+        load_circuits_data()
+        load_drivers_data()
+        load_results_data()
+        last_load_time = datetime.now()  # Update the global variable
+        print("Data loaded!")
+    else:
+        print("Data already loaded within the last hour.")
+        print("Last load time:", last_load_time)
+        load_results_data()
     yield
 
 

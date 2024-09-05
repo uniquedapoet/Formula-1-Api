@@ -91,7 +91,7 @@ class Results(BaseModel):
     circuitname: str = Field(default="", description="Circuit name")
     date: Date = Field(default=Date.today(), description="Date of the Race")
     year: Optional[int] = Field(default=0, description="Year of the Race")
-    isWinner: bool = Field(default=False, description="Boolean describing if the driver Won")
+    winner: bool = Field(default=False, description="Boolean describing if the driver Won")
     seasonWins: int = Field(default=0, description="Number of wins in the season")
 
     @classmethod
@@ -112,7 +112,7 @@ class Results(BaseModel):
                 circuitname=data["circuitname"],
                 date=data["date"],
                 year=data["year"],
-                isWinner=data.get("isWinner", True), 
+                winner=data["is_winner"],
                 seasonWins=data.get("seasonWins", 0)  # Provide default value if key is missing
             )
         except ValidationError as e:
