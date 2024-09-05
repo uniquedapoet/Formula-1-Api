@@ -53,4 +53,5 @@ class Results(Base):
     circuitname = Column(String)
     date = Column(Date)
     year = Column(Integer)
+    isWinner = Column(Boolean)
     seasonWins = Column(Integer)
