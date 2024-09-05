@@ -36,18 +36,20 @@ def read_root():
 async def lifespan(app: FastAPI):
     global last_load_time
     start_time = datetime.now()
+    load_circuits_data()
+    load_drivers_data()
+    load_results_data()
     print("Starting up...", start_time.hour)
     # Check if an hour has passed since the last load time
-    if start_time - last_load_time >= timedelta(hours=1):
-        load_circuits_data()
-        load_drivers_data()
-        load_results_data()
-        last_load_time = datetime.now()  # Update the global variable
-        print("Data loaded!")
-    else:
-        print("Data already loaded within the last hour.")
-        print("Last load time:", last_load_time)
-        load_results_data()
+    # if start_time - last_load_time >= timedelta(hours=1):
+    #     load_circuits_data()
+    #     load_drivers_data()
+    #     load_results_data()
+    #     last_load_time = datetime.now()  # Update the global variable
+    #     print("Data loaded!")
+    # else:
+    #     print("Data already loaded within the last hour.")
+
     yield
 
 
